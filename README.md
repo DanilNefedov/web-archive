@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+___:red_circle:A compatibility error between the nextAuth library and the next version older than 13.4.3 . Name conflict in "middleware" file___
+
 First, run the development server:
 
 ```bash

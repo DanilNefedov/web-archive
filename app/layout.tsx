@@ -2,6 +2,7 @@ import { Navigation } from '@/components/navigation/navigation'
 import './globals.css'
 import { IBM_Plex_Sans_Condensed } from 'next/font/google'
 import { Header } from '@/components/header/header'
+import { Providers } from '@/components/providers/providers'
 
 const IBM = IBM_Plex_Sans_Condensed({
   weight: ['400', '700'],
@@ -23,20 +24,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={IBM.className}>
-        <div className="wrapper">
-          <Navigation></Navigation>
+        <Providers>
+          <div className="wrapper">
+            <Navigation></Navigation>
 
 
-          <div className="main-section-container">
-            <Header></Header>
+            <div className="main-section-container">
+              <Header></Header>
 
-            <main>
-              {children}
-            </main>
+              <main>
+                {children}
+              </main>
+
+            </div>
 
           </div>
+        </Providers>
 
-        </div>
+
       </body>
     </html>
   )

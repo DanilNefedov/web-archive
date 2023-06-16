@@ -1,10 +1,12 @@
+import { AddSection } from './addSection'
 import style from './header.module.css'
-import { Section } from './section'
 import classNames from 'classnames'
+import { IsAuthHeader } from './isAuthHeader'
 
 
 
 export function Header(){
+
     return(
         <header  className={style.nav}>
             <ul className={style.listNav}>
@@ -21,7 +23,8 @@ export function Header(){
                 </li>
             </ul>
 
-            <Section></Section>
+            <IsAuthHeader></IsAuthHeader>
+            <AddSection></AddSection>
         </header>
     )
 }
