@@ -8,5 +8,8 @@ export const authProviders: AuthOptions = {
             clientId:process.env.GOOGLE_CLIENT_ID as string,//for TS
             clientSecret:process.env.GOOGLE_SECRET as string//for TS
         })
-    ]
+    ],
+    pages:{
+        signIn:'/'
+    }
 }

@@ -1,4 +1,5 @@
 import style from './navigation.module.css'
+import { LogOut } from './logOut'
 
 
 export function ThemeLogout(){
@@ -8,9 +9,7 @@ export function ThemeLogout(){
                 <img src="" alt="theme" />
             </div>
              
-            <a className={style.btnLogout}>
-                Log Out
-            </a>
+           <LogOut></LogOut>
         </div>
     )
 }
