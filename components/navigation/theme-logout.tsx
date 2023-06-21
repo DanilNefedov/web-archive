@@ -1,5 +1,5 @@
 import style from './navigation.module.css'
-import { LogOut } from './logOut'
+import { LogOut } from './log-out'
 
 
 export function ThemeLogout(){

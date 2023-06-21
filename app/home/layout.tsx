@@ -1,7 +1,6 @@
 import { Navigation } from '@/components/navigation/navigation'
 import '../globals.css'
 import { Header } from '@/components/header/header'
-import { Providers } from '@/components/providers/providers'
 
 
 export default function HomeLayout({

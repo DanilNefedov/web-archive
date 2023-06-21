@@ -26,7 +26,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true} className={IBM.className}>
         <Providers>
           <div className="wrapper">
-            
+
             {children}
 
           </div>
