@@ -1,8 +1,8 @@
 import { Providers } from '@/components/providers/providers'
-import { IBM_Plex_Sans_Condensed } from 'next/font/google'
+import {  Roboto } from 'next/font/google'
 
 
-const IBM = IBM_Plex_Sans_Condensed({
+const IBM = Roboto({
   weight: ['400', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],

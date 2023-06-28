@@ -4,6 +4,11 @@
     --active-text:#EEF0F4;
     --btn-desactive:#3B4758;
     --btn-active:#0077E4;
+    --light-gray:#BAC4D1;
+
+
+    --bg-second: #1D232C;
+    --shadow-bg: 0px 4px 20px 0px rgba(7, 6, 18, 0.10);
 }
 
 
@@ -44,8 +49,9 @@ body {
     width: 100%;
     background-color: var(--main-bg-black);
     color:var(--desactive-text);
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.8px;
 }
 
 
@@ -71,7 +77,7 @@ button::-moz-focus-inner {
 a,
 a:visited {
     text-decoration: none;
-    color:var(--desactive-text)
+    color:inherit;
 }
 
 a:hover {
@@ -99,19 +105,50 @@ h6 {
     overflow: hidden;
     display: flex;
     height: 100vh;
+    padding: 20px;
 }
 
 
 .main-section-container{
-    padding: 140px 130px 82px 90px;
     flex-grow: 1;
 }
 
-ul .active a{
+ul .active-nav a{
     color: var(--active-text);
-   
+    background-color: var(--btn-active);
 }
 
-ul .active{
+ul .active-nav{
     border-color: var(--active-text);
+}
+
+.btn{
+    background-color: var(--btn-desactive);
+    border-radius: 6px;
+    padding: 10px 15px;
+    /* margin-top: 20px; */
+    display: block;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: var(--btn-active);
+    color: var(--active-text);
+}
+
+
+.elem{
+    margin-right: 10px;
+}
+.elem a{
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 14px 16px;
+    border-radius: 6px;
+}
+.elem a:hover{
+    color:var(--active-text);
 }

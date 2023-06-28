@@ -1,5 +1,13 @@
 .navigation{
-    padding: 140px 90px 82px 150px;
+    display: inline-flex;
+    margin-right: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 12px;
+
+    background: var(--bg-second);
+    box-shadow: var(--shadow-bg);
 
 }
 
@@ -9,54 +17,32 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    padding: 20px 16px;
 }
 
-.userPhoto{
-    border: 4px solid var(--active-text);
-    border-radius: 50%;
-    margin-bottom: 29px;
-    width: 104px;
+.sectionLogo{
+    display: flex;
+    align-items: center;
 }
-
-.userPhoto img{
-    width: 96px;
-    height: 96px;
-    display: block;
-    object-fit: cover;
-}
-
-.nameUser{
-    font-size: 24px;
+.logoName{
+    font-weight: 600;
+    padding-left: 10px;
     color: var(--active-text);
+    font-size: 20px;
 }
 
-.item{
-    padding: 20px 0;
-    
-}
-.item a{
-    transition: 0.3s;
-    cursor: pointer;
-}
-.item a:hover{
-    font-weight: 700;
-    color:var(--active-text);
+.navList{
+    flex-grow: 1;
+    margin: 20px 0;
 }
 
-.btnLogout{
-    background-color: var(--desactive-text);
-    border-radius: 10px;
-    padding: 10px 15px;
-    margin-top: 20px;
-    display: block;
-    text-align: center;
-    max-width: 100px;
-    color: var(--main-bg-black);
-    transition: 0.3s;
-    cursor: pointer;
+ .item{
+    margin-bottom: 10px;
 }
 
-.btnLogout:hover{
-    background-color: var(--active-text);
+
+.themeLog .btnLogout{
+    color: var(--light-gray);
 }
+
 

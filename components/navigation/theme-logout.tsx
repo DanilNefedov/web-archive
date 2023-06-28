@@ -4,10 +4,10 @@ import { LogOut } from './log-out'
 
 export function ThemeLogout(){
     return(
-        <div className="">
-            <div className="theme">
+        <div className={style.themeLog}>
+            {/* <div className="theme">
                 <img src="" alt="theme" />
-            </div>
+            </div> */}
              
            <LogOut></LogOut>
         </div>

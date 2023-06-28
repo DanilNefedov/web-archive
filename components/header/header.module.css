@@ -1,36 +1,31 @@
-.nav, .listNav{
+.header, .listNav{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.nav{
-    margin-bottom: 70px;
+.header{
+    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+    padding: 20px 24px;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-second);
+    box-shadow: var(--shadow-bg);
+    border-radius: 12px;
 }
 
-.elem{
-    margin: 0 130px 0 0;
-    padding-bottom: 10px;
-    border-style: solid;
-    border-color: transparent;
-    border-width: 0 0 3px;
+
+.item a{
+    padding: 14px 16px;
 }
 
-.elem a {
-    cursor: pointer;
-    transition: 0.3s;
-    display: block;
-}
-.elem a:hover{
-    color:var(--active-text);
+
+.addSection .addSectionBtn{
+    color: var(--light-gray);
 }
 
-.addSectionBtn{
-    background-color: var(--desactive-text);
-    padding: 10px 15px;
-    color: var(--main-bg-black);
-    border-radius: 8px;
-    /* font-family:inherit;
-    font-weight: inherit;
-    font-size: inherit; */
+.addSectionBtn:hover{
+    color: var(--active-text);
 }

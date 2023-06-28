@@ -1,33 +1,22 @@
+'use client'
+
+import { FrameComponent } from '@/components/frame/frame';
 import { MainContent } from '@/components/main/main-content'
+import { useEffect } from 'react';
+
 
 
 export default function Home() {
+
   return (
     <>
       <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
-      <MainContent></MainContent>
+      
+    {/* <iframe 
+    src='https://www.olx.ua/l'
+    // src="https://rozetka.com.ua/ua/" 
+     ></iframe> */}
+      {/* <FrameComponent></FrameComponent> */}
       
     </>
    

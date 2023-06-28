@@ -8,22 +8,22 @@ import { IsAuthHeader } from './isAuthHeader'
 export function Header(){
 
     return(
-        <header  className={style.nav}>
+        <header  className={style.header}>
             <ul className={style.listNav}>
-                <li className={classNames(style.elem, 'active')}>
+                <li className={classNames(style.item, 'elem active-nav')}>
                     <a href="#">All</a> 
                 </li>
 
-                <li className={style.elem}>
+                <li className={classNames(style.item, 'elem')}>
                     <a href="#">Sites</a> 
                 </li>
 
-                <li className={style.elem}> 
+                <li className={classNames(style.item, 'elem')}> 
                     <a href="#">Photo</a> 
                 </li>
             </ul>
 
-            <IsAuthHeader></IsAuthHeader>
+            {/* <IsAuthHeader></IsAuthHeader> */}
             <AddSection></AddSection>
         </header>
     )
