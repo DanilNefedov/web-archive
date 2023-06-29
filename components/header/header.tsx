@@ -2,6 +2,7 @@ import { AddSection } from './addSection'
 import style from './header.module.css'
 import classNames from 'classnames'
 import { IsAuthHeader } from './isAuthHeader'
+import Link from 'next/link'
 
 
 
@@ -11,15 +12,15 @@ export function Header(){
         <header  className={style.header}>
             <ul className={style.listNav}>
                 <li className={classNames(style.item, 'elem active-nav')}>
-                    <a href="#">All</a> 
+                    <Link href="#">All</Link> 
                 </li>
 
                 <li className={classNames(style.item, 'elem')}>
-                    <a href="#">Sites</a> 
+                    <Link href="#">Sites</Link> 
                 </li>
 
                 <li className={classNames(style.item, 'elem')}> 
-                    <a href="#">Photo</a> 
+                    <Link href="#">Photo</Link> 
                 </li>
             </ul>
 
