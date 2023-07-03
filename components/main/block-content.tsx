@@ -1,8 +1,13 @@
+'use client'
+
+import { useEffect } from 'react'
 import style from './main-content.module.css'
 
 
 
 export function BlockContent (){
+   
+
     return(
         <div className="content">
             <div className="container">
@@ -12,8 +17,8 @@ export function BlockContent (){
                     Info Info Info info info info info
                 </div>
 
-                
-            </div>
+                <button >Send</button>
+            </div>  
         </div>
     )
 }

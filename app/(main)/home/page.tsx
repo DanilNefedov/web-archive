@@ -1,9 +1,8 @@
 'use client'
-
 import { FrameComponent } from '@/components/frame/frame';
 import { MainContent } from '@/components/main/main-content'
-import clientPromise from '@/mongoDB';
-import { getUsers } from '@/mongoDB/users';
+// import clientPromise from '@/mongoDB';
+// import { getUsers } from '@/mongoDB/users';
 import { useEffect } from 'react';
 
 
@@ -16,7 +15,7 @@ import { useEffect } from 'react';
 // }
 
 
-export default async function Home() {
+export default function Home() {
   // const user = await fetchUsers()
 
   console.log( 'ww')
