@@ -1,8 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
-    name: String  
+    name: String,
+    email: String  
   },
   {
     timestamps: true,
