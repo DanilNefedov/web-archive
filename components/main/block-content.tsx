@@ -1,13 +1,19 @@
 'use client'
+import { useAppDispatch, useAppSelector } from '@/app/Redux/hook';
 import { useEffect, useState } from 'react';
 
 export function BlockContent (){
   const [user, setUser] = useState(null);
+  const userStore = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('api/user', {
+        const email = 'dinilnefedov@gmail.com'
+        const res = await fetch(`api/user?email=${encodeURIComponent(email)}`, {
           cache: "no-store"
         });
 
@@ -26,7 +32,7 @@ export function BlockContent (){
     fetchData();
   }, []);
 
-  console.log(user);
+  console.log(userStore);
 
   return (
     <div className="content">

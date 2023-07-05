@@ -1,5 +1,6 @@
 import { Providers } from '@/components/providers/providers'
-import {  Roboto } from 'next/font/google'
+import { Roboto } from 'next/font/google'
+import { ProviderStore } from './Redux/provider'
 
 
 const IBM = Roboto({
@@ -25,11 +26,11 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={IBM.className}>
         <Providers>
-          <div className="wrapper">
-
-            {children}
-
-          </div>
+          <ProviderStore>
+            <div className="wrapper">
+              {children}
+            </div>
+          </ProviderStore>
         </Providers>
       </body>
     </html>
