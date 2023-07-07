@@ -4,6 +4,8 @@ import DiscordProvider from "next-auth/providers/discord";
 import connectDB from "@/lib/mongoose";
 import User from "@/models/user";
 import { useAppDispatch, useAppSelector } from "@/app/Redux/hook";
+import { RequestData } from "@/types/types";
+import { postCall } from "../callsApi/postCall";
 
 
 export const authProviders: AuthOptions = {
@@ -21,42 +23,47 @@ export const authProviders: AuthOptions = {
     ],
     callbacks:{
         async signIn({ user, account, profile, email, credentials }) {
-            const isAllowedToSignIn = true
 
+            // --------------//--------------------//
+
+            //Check and respond when a user is created with the same mail, but uses a different ISP
+
+            // --------------//--------------------//
+
+            const isAllowedToSignIn = true
+           
             if (isAllowedToSignIn) {
                 const data = {
                     name: user.name,
-                    email: user.email
-                }
-                try{
-                    await connectDB();
-                    const existingUser = await User.findOne({ email: user.email });
-                    console.log(existingUser)
-                    if (!existingUser) {
-                       const res = await fetch('http://localhost:3000/api/user',{
-                            method: 'POST',
-                            headers: {
-                            'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data),
-                        })
+                    email: user.email,
+                    provider: account?.provider,
+                    img: user.image,
+                    connection_id:user.id,
+                } 
+                const requestData: RequestData<typeof data> = {
+                    url: 'http://localhost:3000/api/user',
+                    data: data,
+                };
+                await connectDB();
+                const existingUser = await User.findOne({ connection_id: user.id });
 
-                        if(res.ok){
-                            const result = await res.json();
-                            console.log(result)
-                        }else{
-                            console.error( res.status);
-                        }
-                    }
-                    
-                    
-                }catch(error){
-                    console.log(error)
+                // console.log(user, account, profile)
+
+                if (!existingUser) {
+                    postCall(requestData)
+                    .then(response => response.json())
+                    .then(responseData => {
+                        console.log('Successful answer:', responseData.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 }
-              return true
+                
+                return true
             } else {
               // Return false to display a default error message
-              return false
+                return false
               // Or you can return a URL to redirect to:
               // return '/unauthorized'
             }

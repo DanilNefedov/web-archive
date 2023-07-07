@@ -1,6 +1,6 @@
-import { Providers } from '@/components/providers/providers'
+import { ProviderAuth } from '@/components/providers/providerAuth'
 import { Roboto } from 'next/font/google'
-import { ProviderStore } from './Redux/provider'
+import { ProviderStore } from '../components/providers/providerStore'
 
 
 const IBM = Roboto({
@@ -25,13 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={IBM.className}>
-        <Providers>
+        <ProviderAuth>
           <ProviderStore>
             <div className="wrapper">
               {children}
             </div>
           </ProviderStore>
-        </Providers>
+        </ProviderAuth>
       </body>
     </html>
   )

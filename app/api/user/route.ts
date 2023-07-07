@@ -4,9 +4,9 @@ import { NextResponse } from "next/server"
 
 
 export async function POST(req: Request){
-  const {name, email} = await req.json()
+  const {name, email, provider, img, connection_id} = await req.json()
   await connectDB()
-  await User.create({name, email}) 
+  await User.create({name, email, provider, img, connection_id}) 
   return NextResponse.json({message:'Create user'}, {status:201}) 
 }
 

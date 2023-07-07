@@ -1,38 +1,30 @@
 'use client'
 import { useAppDispatch, useAppSelector } from '@/app/Redux/hook';
+import { getCall } from '@/config/callsApi/getCall';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 export function BlockContent (){
-  const [user, setUser] = useState(null);
   const userStore = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
-
-
+  const session = useSession()
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
+      const url = 'api/user?email=dinilnefedov@gmail.com'; // Замените на свою ссылку
       try {
-        const email = 'dinilnefedov@gmail.com'
-        const res = await fetch(`api/user?email=${encodeURIComponent(email)}`, {
-          cache: "no-store"
-        });
-
-        if (!res.ok) {
-          console.log('res user is not OK');
-          return;
-        }
-
-        const userData = await res.json();
-        setUser(userData.user);
-      } catch (err) {
-        console.log(err);
+        const response = await getCall(url) ;
+        console.log('Successful Response:', response);
+      } catch (error) {
+        console.error(error);
       }
-    };
+    }
 
     fetchData();
-  }, []);
+  }, []); 
 
-  console.log(userStore);
+
+  console.log(userStore, session);
 
   return (
     <div className="content">

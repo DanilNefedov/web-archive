@@ -3,7 +3,10 @@ import mongoose, {Schema} from 'mongoose';
 const userSchema = new Schema(
   {
     name: String,
-    email: String  
+    email: String,
+    provider: String,
+    img: String,
+    connection_id: String
   },
   {
     timestamps: true,
