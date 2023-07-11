@@ -17,7 +17,27 @@ export type theme = {
     navigation:navigation[]
 }
 
-export type navTheme = [{
-    connection_id:string | null,
-    theme:theme[]
-}]
+export type collectionTheme =  {
+    // collectionNavTheme :{
+        connection_id: null,
+        theme: [{
+            theme_name: string | null,
+            navigation: [{
+                nav_name: null,
+                title: null,
+                description: null,
+            }]
+        }],
+    // }
+}
+
+export type navTheme = {
+    status: boolean,
+    error: boolean,
+    collectionNavTheme:{
+        connection_id:string | null,
+        theme:theme[]
+    }
+}
+
+

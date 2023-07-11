@@ -1,37 +1,33 @@
 'use client'
-import { navTheme, navigation, theme } from "@/types/types"
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { collectionTheme, navTheme, navigation, theme } from "@/types/types"
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 
-const initialState: navTheme = [{
-    connection_id: null,
-    theme: [{
-        theme_name: null,
-        navigation: [{
-            nav_name: null,
-            title: null,
-            description: null,
-        }]
-    }],
-}]
+const initialState: navTheme = {
+    status: false,
+    error: false,
+    collectionNavTheme: {
+        connection_id: null,
+        theme: [],
+    }
+}
 
 
-export const fetchNavTheme = createAsyncThunk<navTheme[], string, {rejectValue:string}>(
+export const fetchNavTheme = createAsyncThunk<collectionTheme, string, { rejectValue: string }>(
     'navTheme/fetchNavTheme',
-    async function (id , {rejectWithValue}){
+    async function (id, { rejectWithValue }) {
         const response = await fetch(`/api/nav-theme?connection_id=${id}`);
 
-        if(!response.ok){
-            return rejectWithValue('Server Error!')
+        if (!response.ok) {
+            return rejectWithValue('Server Error!');
         }
 
-        const data = await response.json()
-        
-        return data
-        
+        const data = await response.json();
+
+        return data.navTheme[0]; 
     }
-)
+);
 
 
 
@@ -41,48 +37,45 @@ export const fetchNavTheme = createAsyncThunk<navTheme[], string, {rejectValue:s
 const navThemeSlice = createSlice({
     name: 'navTheme',
     initialState,
-    reducers: {
-        setConnectionId(state, action: PayloadAction<{connection_id: string}>){
-            state.push({
-                connection_id: action.payload.connection_id,
-                theme: []
+    reducers: {},
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchNavTheme.pending, (state) =>{
+                state.status = true,
+                state.error = false
             })
-        },
-        addTheme(state, action: PayloadAction<{connection_id:string, theme_name:string}>){
-            const findConnection = state.find(el => el.connection_id === action.payload.connection_id)
-            if(findConnection){
-                findConnection.theme.push({
-                    theme_name: action.payload.theme_name,
-                    navigation: []
-                })
-            }
-        },
-        addNavigation(state, action:PayloadAction<{connection_id:string, navigation: navigation, nav_name: string, title:string, description: string, theme_name:string}> ){
-            const findConnection = state.find(el => el.connection_id === action.payload.connection_id)
-            if(findConnection && findConnection.theme){
-                const findNameTheme = findConnection.theme.find(el => el.theme_name === action.payload.theme_name)
-                if(findNameTheme){
-                    findNameTheme.navigation.push({
-                        nav_name: action.payload.nav_name,
-                        title: action.payload.title,
-                        description: action.payload.description,
+            .addCase(fetchNavTheme.fulfilled, (state, action: PayloadAction<collectionTheme>) => {
+                state.status = false
+                state.error = false
+                if(action.payload){
+                    state.collectionNavTheme.connection_id = action.payload.connection_id
+                    action.payload.theme.map(elementAction => {
+                        const findTheme = state.collectionNavTheme.theme.find(el => el.theme_name?.toLowerCase() === elementAction?.theme_name?.toLowerCase())
+
+                        if (!findTheme && findTheme !== null) {
+                            state.collectionNavTheme.theme.push({
+                                theme_name: elementAction.theme_name,
+                                navigation: elementAction.navigation.map((el): navigation => ({
+                                    nav_name: el.nav_name,
+                                    description: el.description,
+                                    title: el.title,
+                                })),
+                            });
+                        }
                     })
                 }
-            }
-        }
-
-    },
-
-    extraReducers: (builder) =>{
-        builder
-        .addCase(fetchNavTheme.fulfilled, (state, action) => {
-            console.log(action.payload)
-        })
+                
+            })
+            .addMatcher(isEror, (state, action: PayloadAction<boolean>) =>{
+                state.error = action.payload,
+                state.status = false
+            })
     }
 })
 
-
-export const { setConnectionId, addTheme, addNavigation } = navThemeSlice.actions
-
-
 export default navThemeSlice.reducer
+
+function isEror(action: AnyAction){
+    return action.type.endsWith('rejected')
+}

@@ -5,12 +5,14 @@ import connectDB from "@/lib/mongoose";
 import User from "@/models/user";
 import { RequestData } from "@/types/types";
 import { postCall } from "../callsApi/postCall";
-import type { Session } from '../../node_modules/next-auth/src/core/types';
-import type { JWT } from '../../node_modules/next-auth/src/jwt/types';
+
 
 
 
 export const authProviders: AuthOptions = {
+    session: {
+        strategy: 'jwt',
+    },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -26,13 +28,6 @@ export const authProviders: AuthOptions = {
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-
-            // --------------//--------------------//
-
-            //Check and respond when a user is created with the same mail, but uses a different ISP
-
-            // --------------//--------------------//
-
 
             const isAllowedToSignIn = true
 
@@ -51,7 +46,6 @@ export const authProviders: AuthOptions = {
                 await connectDB();
                 const existingUser = await User.findOne({ connection_id: user.id });
 
-                console.log(profile)
 
                 if (!existingUser) {
                     postCall(requestData)
@@ -66,18 +60,16 @@ export const authProviders: AuthOptions = {
 
                 return true
             } else {
-                // Return false to display a default error message
                 return false
-                // Or you can return a URL to redirect to:
-                // return '/unauthorized'
+
             }
         },
-
-        session: async ({ session, token }:{session: Session, token:JWT}) => {
-            if (session?.user) {
-                session.user.id  = token.uid;
-            }
         
+        session: async ({ session, token }) => {
+            if (session?.user) {
+                session.user.id = token.uid;
+            }
+
             return session;
         },
         jwt: async ({ user, token }) => {
@@ -86,9 +78,6 @@ export const authProviders: AuthOptions = {
             }
             return token;
         },
-    },
-    session: {
-        strategy: 'jwt',
     },
     pages: {
         signIn: '/'
