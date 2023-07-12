@@ -24,8 +24,10 @@ export const fetchNavTheme = createAsyncThunk<collectionTheme, string, { rejectV
         }
 
         const data = await response.json();
-
-        return data.navTheme[0]; 
+        console.log(data.navTheme[0])
+        if(data.navTheme[0].lenght > 0){
+            return data.navTheme[0]; 
+        }
     }
 );
 
@@ -46,6 +48,7 @@ const navThemeSlice = createSlice({
                 state.error = false
             })
             .addCase(fetchNavTheme.fulfilled, (state, action: PayloadAction<collectionTheme>) => {
+                console.log('ww')
                 state.status = false
                 state.error = false
                 if(action.payload){
@@ -67,15 +70,20 @@ const navThemeSlice = createSlice({
                 }
                 
             })
-            .addMatcher(isEror, (state, action: PayloadAction<boolean>) =>{
-                state.error = action.payload,
+            .addCase(fetchNavTheme.rejected, (state) =>{
                 state.status = false
+                state.error = false
             })
+            // .addMatcher(isEror, (state, action: PayloadAction<boolean>) =>{
+            //     console.log(action.payload)
+            //     state.error = action.payload,
+            //     state.status = false
+            // })
     }
 })
 
 export default navThemeSlice.reducer
 
-function isEror(action: AnyAction){
-    return action.type.endsWith('rejected')
-}
+// function isEror(action: AnyAction){
+//     return action.type.endsWith('rejected')
+// }

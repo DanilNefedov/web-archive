@@ -10,9 +10,9 @@ import { postCall } from "../callsApi/postCall";
 
 
 export const authProviders: AuthOptions = {
-    session: {
-        strategy: 'jwt',
-    },
+    // session: {
+    //     strategy: 'jwt',
+    // },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -64,7 +64,6 @@ export const authProviders: AuthOptions = {
 
             }
         },
-        
         session: async ({ session, token }) => {
             if (session?.user) {
                 session.user.id = token.uid;

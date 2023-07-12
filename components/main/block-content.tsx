@@ -1,7 +1,7 @@
 'use client'
 import { fetchNavTheme } from '@/app/Redux/Slices/nav-theme';
 import { useAppDispatch, useAppSelector } from '@/app/Redux/hook';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 export function BlockContent (){
@@ -22,7 +22,7 @@ export function BlockContent (){
     fetchData();
   }, [session]); 
 
-  console.log(userStore);
+  console.log(userStore, session);
 
   return (
     <div className="content">
